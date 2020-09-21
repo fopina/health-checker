@@ -1,3 +1,4 @@
+project_name: health-checker
 before:
   hooks:
     - go mod tidy
