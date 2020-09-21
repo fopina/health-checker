@@ -34,8 +34,10 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64,linux/arm/v7 \
             --build-arg VERSION=${{ steps.prepare.outputs.tag_name }} \
+            -f docker/Dockerfile \
             --push \
             -t fopina/health-checker:python-${{ steps.prepare.outputs.tag_name }} \
+            -t fopina/health-checker:python \
             .
       
       - name: build (and publish) main image
@@ -43,6 +45,7 @@ jobs:
           docker buildx build \
             --platform linux/amd64,linux/arm64,linux/arm/v7 \
             --build-arg VERSION=${{ steps.prepare.outputs.tag_name }} \
+            -f docker/Dockerfile \
             --target bash \
             --push \
             -t fopina/health-checker:${{ steps.prepare.outputs.tag_name }} \
